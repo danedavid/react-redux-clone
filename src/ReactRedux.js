@@ -1,3 +1,7 @@
+/**
+ * React component which renders and manages the counter state
+ * via store interaction library (react-redux-clone) located at './lib'
+ */
 import React from 'react';
 import { Provider, connect } from './lib';
 import { createStore } from 'redux';

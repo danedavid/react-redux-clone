@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import ReactReduxContext from './context';
 
+/**
+ * <Provider/> component.
+ * Renders the React context provider. The value of the context
+ * is of the shape:
+ * {
+ *   state: current Redux store obtained by store.getState()
+ *   dispatch: store.dispatch
+ * }
+ */
 export default ({
   store,
   children,
@@ -8,13 +17,14 @@ export default ({
   const [state, setState] = useState(store.getState());
 
   useEffect(() => {
-    return store.subscribe(() => setState(store.getState()));
-  });
+    const unsubscribe = store.subscribe(() => setState(store.getState()));
+    return unsubscribe;
+  }, [store]);
 
   return (
     <ReactReduxContext.Provider
       value={{
-        state: state,
+        state,
         dispatch: store.dispatch,
       }}
     >

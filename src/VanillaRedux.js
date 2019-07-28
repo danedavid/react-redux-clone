@@ -1,3 +1,7 @@
+/**
+ * React component which renders and manages the counter state
+ * via native (vanilla) Redux APIs
+ */
 import React, { useEffect, useState } from 'react';
 import { createStore } from 'redux';
 
@@ -18,9 +22,9 @@ const store = createStore(reducer, 0);
 
 const App = () => {
   const [value, setValue] = useState(store.getState());
-  useEffect(() => {
-    return store.subscribe(() => setValue(store.getState()));
-  }, [])
+
+  useEffect(() => store.subscribe(() => setValue(store.getState())), []);
+
   return (
     <div className="app">
       <div>
